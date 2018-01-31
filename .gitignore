@@ -22,3 +22,4 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 tg_webhooks_bot-*.tar
 
+service_account.json
