@@ -1,5 +1,7 @@
 %{
   "certifi": {:hex, :certifi, "2.0.0", "a0c0e475107135f76b8c1d5bc7efb33cd3815cb3cf3dea7aefdd174dabead064", [:rebar3], [], "hexpm"},
+  "cowboy": {:hex, :cowboy, "1.0.4", "a324a8df9f2316c833a470d918aaf73ae894278b8aa6226ce7a9bf699388f878", [:make, :rebar], [{:cowlib, "~> 1.0.0", [hex: :cowlib, repo: "hexpm", optional: false]}, {:ranch, "~> 1.0", [hex: :ranch, repo: "hexpm", optional: false]}], "hexpm"},
+  "cowlib": {:hex, :cowlib, "1.0.2", "9d769a1d062c9c3ac753096f868ca121e2730b9a377de23dec0f7e08b1df84ee", [:make], [], "hexpm"},
   "diplomat": {:hex, :diplomat, "0.9.5", "3bb66ab2a0569f290608c9b460090befeba8d1888ed951e17edc17d20ddd67c1", [:mix], [{:exprotobuf, "~> 1.2", [hex: :exprotobuf, repo: "hexpm", optional: false]}, {:goth, "~> 0.5", [hex: :goth, repo: "hexpm", optional: false]}, {:httpoison, "~> 0.11", [hex: :httpoison, repo: "hexpm", optional: false]}, {:poison, "~> 2.2 or ~> 3.1", [hex: :poison, repo: "hexpm", optional: false]}], "hexpm"},
   "distillery": {:hex, :distillery, "1.5.2", "eec18b2d37b55b0bcb670cf2bcf64228ed38ce8b046bb30a9b636a6f5a4c0080", [:mix], [], "hexpm"},
   "exprotobuf": {:hex, :exprotobuf, "1.2.9", "f3cac1b0d0444da3c72cdfe80e394d721275dc80b1d7703ead9dad9267e93822", [:mix], [{:gpb, "~> 3.24", [hex: :gpb, repo: "hexpm", optional: false]}], "hexpm"},
@@ -10,9 +12,12 @@
   "idna": {:hex, :idna, "5.1.0", "d72b4effeb324ad5da3cab1767cb16b17939004e789d8c0ad5b70f3cea20c89a", [:rebar3], [{:unicode_util_compat, "0.3.1", [hex: :unicode_util_compat, repo: "hexpm", optional: false]}], "hexpm"},
   "json_web_token": {:hex, :json_web_token, "0.2.10", "61041d56369422c5e3a770cf7d7bf27224b3c4c12d3a7d79b43a002df766db22", [:mix], [{:poison, "~> 3.1", [hex: :poison, repo: "hexpm", optional: false]}], "hexpm"},
   "metrics": {:hex, :metrics, "1.0.1", "25f094dea2cda98213cecc3aeff09e940299d950904393b2a29d191c346a8486", [:rebar3], [], "hexpm"},
+  "mime": {:hex, :mime, "1.2.0", "78adaa84832b3680de06f88f0997e3ead3b451a440d183d688085be2d709b534", [:mix], [], "hexpm"},
   "mimerl": {:hex, :mimerl, "1.0.2", "993f9b0e084083405ed8252b99460c4f0563e41729ab42d9074fd5e52439be88", [:rebar3], [], "hexpm"},
   "nadia": {:hex, :nadia, "0.4.2", "a0ec739815674581e74b407450e448aa494921889c62f2b5d18ee2a43f6bad2e", [:mix], [{:httpoison, "~> 0.9", [hex: :httpoison, repo: "hexpm", optional: false]}, {:poison, "~> 3.0", [hex: :poison, repo: "hexpm", optional: false]}], "hexpm"},
+  "plug": {:hex, :plug, "1.4.4", "279b547662272cd835a8ca089717201dd3be51bb4705354eaf1b0346744acc82", [:mix], [{:cowboy, "~> 1.0.1 or ~> 1.1", [hex: :cowboy, repo: "hexpm", optional: true]}, {:mime, "~> 1.0", [hex: :mime, repo: "hexpm", optional: false]}], "hexpm"},
   "poison": {:hex, :poison, "3.1.0", "d9eb636610e096f86f25d9a46f35a9facac35609a7591b3be3326e99a0484665", [:mix], [], "hexpm"},
+  "ranch": {:hex, :ranch, "1.4.0", "10272f95da79340fa7e8774ba7930b901713d272905d0012b06ca6d994f8826b", [:rebar3], [], "hexpm"},
   "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.1", "28a4d65b7f59893bc2c7de786dec1e1555bd742d336043fe644ae956c3497fbe", [:make, :rebar], [], "hexpm"},
   "unicode_util_compat": {:hex, :unicode_util_compat, "0.3.1", "a1f612a7b512638634a603c8f401892afbf99b8ce93a45041f8aaca99cadb85e", [:rebar3], [], "hexpm"},
 }
