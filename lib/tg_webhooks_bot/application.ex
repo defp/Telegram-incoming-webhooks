@@ -10,6 +10,7 @@ defmodule TgWebhooksBot.Application do
     children = [
       # Starts a worker by calling: TgWebhooksBot.Worker.start_link(arg)
       # {TgWebhooksBot.Worker, arg},
+      TgWebhooksBot.Repo,
       Plug.Adapters.Cowboy.child_spec(:http, TgWebhooksBot.Router, [], [port: 8080])
     ]
 
