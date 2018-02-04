@@ -24,3 +24,5 @@ tg_webhooks_bot-*.tar
 
 service_account.json
 tg.exs
+
+postgres-data

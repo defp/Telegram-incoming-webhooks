@@ -1,0 +1,17 @@
+version: '3'
+services:
+  web:
+    build: .
+    environment:
+      - PG_HOST=postgres
+      - PG_USERNAME=postgres
+    volumes:
+      - .:/app
+    ports:
+     - "5000:5000"
+    links:
+      - postgres
+  postgres:
+    image: "postgres:10.1"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data

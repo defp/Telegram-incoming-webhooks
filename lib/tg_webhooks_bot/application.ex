@@ -2,16 +2,16 @@ defmodule TgWebhooksBot.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
-
   use Application
 
   def start(_type, _args) do
     # List all child processes to be supervised
+    port = String.to_integer System.get_env("PORT")
     children = [
       # Starts a worker by calling: TgWebhooksBot.Worker.start_link(arg)
       # {TgWebhooksBot.Worker, arg},
       TgWebhooksBot.Repo,
-      Plug.Adapters.Cowboy.child_spec(:http, TgWebhooksBot.Router, [], [port: 8080])
+      Plug.Adapters.Cowboy.child_spec(:http, TgWebhooksBot.Router, [], [port: port])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
