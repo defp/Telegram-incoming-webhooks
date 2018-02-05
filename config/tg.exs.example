@@ -13,3 +13,5 @@ config :tg_webhooks_bot, TgWebhooksBot.Repo,
 config :tg_webhooks_bot, cowboy_options: [
   port: 5000,
 ]
+
+config :tg_webhooks_bot, webhook_url: "https://tg.dsh.li"
