@@ -11,7 +11,10 @@ config :tg_webhooks_bot, TgWebhooksBot.Repo,
   pool_size: 100
 
 config :tg_webhooks_bot, cowboy_options: [
-  port: 5000,
+  port: 443,
+  keyfile: "/etc/letsencrypt/live/tg.dsh.li/privkey.pem",
+  certfile: "/etc/letsencrypt/live/tg.dsh.li/cert.pem",
+  cacertfile: "/etc/letsencrypt/live/tg.dsh.li/chain.pem"
 ]
 
 config :tg_webhooks_bot, webhook_url: "https://tg.dsh.li"
