@@ -27,7 +27,7 @@ defmodule TgWebhooksBot.Router do
   post "/cmd" do
     params = conn.params
     handle(params["message"]["text"], params["message"])
-    Logger.debug("receive: ", params["message"]["text"])
+    Logger.debug(params["message"]["text"])
     send_resp(conn, 200, "ok")
   end
 
