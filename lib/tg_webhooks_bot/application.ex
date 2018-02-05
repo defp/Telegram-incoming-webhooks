@@ -6,12 +6,12 @@ defmodule TgWebhooksBot.Application do
 
   def start(_type, _args) do
     # List all child processes to be supervised
-    port = String.to_integer System.get_env("PORT")
+    cowboy_options = Application.get_env(:tg_webhooks_bot, :cowboy_options) || [port: 5000]
     children = [
       # Starts a worker by calling: TgWebhooksBot.Worker.start_link(arg)
       # {TgWebhooksBot.Worker, arg},
       TgWebhooksBot.Repo,
-      Plug.Adapters.Cowboy.child_spec(:http, TgWebhooksBot.Router, [], [port: port])
+      Plug.Adapters.Cowboy.child_spec(:http, TgWebhooksBot.Router, [], cowboy_options)
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

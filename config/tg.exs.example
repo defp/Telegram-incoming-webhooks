@@ -10,3 +10,6 @@ config :tg_webhooks_bot, TgWebhooksBot.Repo,
   hostname: System.get_env("PG_HOST"),
   pool_size: 100
 
+config :tg_webhooks_bot, cowboy_options: [
+  port: 5000,
+]
