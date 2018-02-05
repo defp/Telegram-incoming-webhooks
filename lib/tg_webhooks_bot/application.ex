@@ -11,7 +11,7 @@ defmodule TgWebhooksBot.Application do
       # Starts a worker by calling: TgWebhooksBot.Worker.start_link(arg)
       # {TgWebhooksBot.Worker, arg},
       TgWebhooksBot.Repo,
-      Plug.Adapters.Cowboy.child_spec(:http, TgWebhooksBot.Router, [], cowboy_options)
+      Plug.Adapters.Cowboy.child_spec(:https, TgWebhooksBot.Router, [], cowboy_options)
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
