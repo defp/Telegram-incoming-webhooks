@@ -6,9 +6,12 @@ services:
       - PG_HOST=postgres
       - PG_USERNAME=postgres
     ports:
-     - "443:443"
+      - "443:443"
+      - "80:80"
     links:
       - postgres
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
   postgres:
     image: "postgres:10.1"
     volumes:
