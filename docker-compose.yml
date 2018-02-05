@@ -5,8 +5,6 @@ services:
     environment:
       - PG_HOST=postgres
       - PG_USERNAME=postgres
-    volumes:
-      - .:/app
     ports:
      - "80:5000"
     links:
