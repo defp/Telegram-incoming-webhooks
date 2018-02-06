@@ -61,6 +61,10 @@ defmodule TgWebhooksBot.Router do
     handle("/start", message)
   end
 
+  defp handle("/callback_url@"<>_, message) do
+    handle("/start", message)
+  end
+
   defp handle("/ping", message) do
     chat_id = message["chat"]["id"]
     Nadia.send_message(chat_id, "pong")
