@@ -2,14 +2,6 @@ use Mix.Config
 
 config :nadia, token: ""
 
-config :tg_webhooks_bot, TgWebhooksBot.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  database: "tg_webhooks_bot_repo",
-  username: System.get_env("PG_USERNAME"),
-  password: System.get_env("PG_PASSWORD"),
-  hostname: System.get_env("PG_HOST"),
-  pool_size: 100
-
 config :tg_webhooks_bot, cowboy_options: [
   port: 443,
   keyfile: "/etc/letsencrypt/live/tg.dsh.li/privkey.pem",

@@ -1,6 +1,8 @@
 FROM bitwalker/alpine-elixir:1.6.1
 
 ENV MIX_ENV=prod
+EXPOSE 443
+VOLUME [ "/etc/letsencrypt" ]
 
 ADD . /app
 WORKDIR /app

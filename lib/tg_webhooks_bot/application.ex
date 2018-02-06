@@ -9,9 +9,6 @@ defmodule TgWebhooksBot.Application do
     cowboy_options = Application.get_env(:tg_webhooks_bot, :cowboy_options) || [port: 5000]
     schema = if Mix.env == :dev do :http else :https end
     children = [
-      # Starts a worker by calling: TgWebhooksBot.Worker.start_link(arg)
-      # {TgWebhooksBot.Worker, arg},
-      TgWebhooksBot.Repo,
       Plug.Adapters.Cowboy.child_spec(schema, TgWebhooksBot.Router, [], cowboy_options)
     ]
 
