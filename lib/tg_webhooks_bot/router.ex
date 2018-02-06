@@ -16,7 +16,13 @@ defmodule TgWebhooksBot.Router do
       params["text"] ->
         Nadia.send_message(chat_id, params["text"])
       params["payload"] ->
-        Nadia.send_message(chat_id, Poison.encode!(params["payload"], pretty: true))
+        # sentry slack
+        if params["payload"]["title"] and params["payload"]["title_link"] do
+          text = "#{params["payload"]["title"]} #{params["payload"]["title_link"]}"
+          Nadia.send_message(chat_id, text)
+        else
+          Nadia.send_message(chat_id, Poison.encode!(params["payload"], pretty: true))
+        end
       true -> 
         Nadia.send_message(chat_id, Poison.encode!(params, pretty: true))
     end
