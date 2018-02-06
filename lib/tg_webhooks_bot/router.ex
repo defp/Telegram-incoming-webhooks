@@ -11,7 +11,6 @@ defmodule TgWebhooksBot.Router do
 
   post "/incoming/:chat_id" do
     params = conn.params
-    IO.puts Poison.encode!(params, pretty: true)
     chat_id = String.to_integer(params["chat_id"])
     cond do
       params["text"] ->
