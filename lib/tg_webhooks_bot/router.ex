@@ -12,7 +12,7 @@ defmodule TgWebhooksBot.Router do
   # https://api.slack.com/incoming-webhooks
   post "/incoming/:chat_id" do
     params = conn.params
-    chat_id = String.to_integer(params.chat_id)
+    chat_id = String.to_integer(param["chat_id"])
     Nadia.send_message(chat_id, params.text)
     send_resp(conn, 200, "ok")
   end
