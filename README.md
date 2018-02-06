@@ -19,6 +19,7 @@ MIX_ENV=prod mix release --verbose --env=prod
 docker
 
 ```bash
+docker build -t tg-webhooks .
 docker run --restart=always -d -p 443:443 -v /etc/letsencrypt/:/etc/letsencrypt/ tg-webhooks:latest
 ```
 
