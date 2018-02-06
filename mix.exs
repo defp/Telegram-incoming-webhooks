@@ -24,6 +24,7 @@ defmodule TgWebhooksBot.MixProject do
     [
       {:cowboy, "~> 1.0.0"},
       {:plug, "~> 1.4"},
+      {:poison, "~> 3.1"},
       {:nadia, "~> 0.4.2"},
       {:distillery, "~> 1.5", runtime: false}
     ]

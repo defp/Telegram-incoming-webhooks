@@ -9,11 +9,19 @@ defmodule TgWebhooksBot.Router do
   plug :match
   plug :dispatch
 
-  # https://api.slack.com/incoming-webhooks
   post "/incoming/:chat_id" do
     params = conn.params
+    IO.puts Poison.encode!(params, pretty: true)
     chat_id = String.to_integer(params["chat_id"])
-    Nadia.send_message(chat_id, inspect(params))
+    cond do
+      params["text"] ->
+        Nadia.send_message(chat_id, params["text"])
+      params["payload"] ->
+        Nadia.send_message(chat_id, Poison.encode!(params["payload"], pretty: true))
+      true -> 
+        Nadia.send_message(chat_id, Poison.encode!(params, pretty: true))
+    end
+ 
     send_resp(conn, 200, "ok")
   end
 
