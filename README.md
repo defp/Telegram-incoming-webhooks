@@ -16,6 +16,12 @@ build
 MIX_ENV=prod mix release --verbose --env=prod
 ```
 
+docker
+
+```bash
+docker run --restart=always -d -p 443:443 -v /etc/letsencrypt/:/etc/letsencrypt/ tg-webhooks:latest
+```
+
 ## links
 
 * https://github.com/zhyu/nadia
