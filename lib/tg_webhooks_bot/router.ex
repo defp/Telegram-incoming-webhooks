@@ -12,18 +12,19 @@ defmodule TgWebhooksBot.Router do
   post "/incoming/:chat_id" do
     params = conn.params
     chat_id = String.to_integer(params["chat_id"])
-    cond do
+    text = cond do
       params["text"] ->
-        Nadia.send_message(chat_id, params["text"])
+        params["text"]
       params["payload"] ->
         payload = Poison.decode!(params["payload"])
-        # sentry slack
-        text = Poison.encode!(payload, pretty: true)
-        Nadia.send_message(chat_id, text)
+        Poison.encode!(payload, pretty: true) # sentry slack
+      params["url"] != nil and params["message"] != nil ->
+        "#{params["message"]} #{params["url"]}" # sentry slack webhooks
       true -> 
-        Nadia.send_message(chat_id, Poison.encode!(params, pretty: true))
+        Poison.encode!(params, pretty: true)
     end
- 
+    
+    Nadia.send_message(chat_id, text)
     send_resp(conn, 200, "ok")
   end
 
