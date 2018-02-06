@@ -17,7 +17,7 @@ defmodule TgWebhooksBot.Router do
         Nadia.send_message(chat_id, params["text"])
       params["payload"] ->
         # sentry slack
-        if params["payload"]["title"] and params["payload"]["title_link"] do
+        if params["payload"]["title"] != nil and params["payload"]["title_link"] != nil do
           text = "#{params["payload"]["title"]} #{params["payload"]["title_link"]}"
           Nadia.send_message(chat_id, text)
         else
