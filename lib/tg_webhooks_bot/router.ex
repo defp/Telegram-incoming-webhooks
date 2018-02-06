@@ -2,38 +2,52 @@ defmodule TgWebhooksBot.Router do
   require Logger
   use Plug.Router
 
-  plug Plug.Logger
-  plug Plug.Parsers, parsers: [:urlencoded, :json],
-                   pass:  ["text/*"],
-                   json_decoder: Poison
-  plug :match
-  plug :dispatch
+  plug(Plug.Logger)
+
+  plug(
+    Plug.Parsers,
+    parsers: [:urlencoded, :json],
+    pass: ["text/*"],
+    json_decoder: Poison
+  )
+
+  plug(:match)
+  plug(:dispatch)
 
   post "/incoming/:chat_id" do
     params = conn.params
     chat_id = String.to_integer(params["chat_id"])
-    text = cond do
-      params["text"] ->
-        params["text"]
-      params["payload"] ->
-        payload = Poison.decode!(params["payload"])
-        Poison.encode!(payload, pretty: true) # sentry slack
-      params["url"] != nil and params["message"] != nil ->
-        "#{params["message"]} #{params["url"]}" # sentry slack webhooks
-      true -> 
-        Poison.encode!(params, pretty: true)
-    end
-    
+
+    text =
+      cond do
+        params["text"] ->
+          params["text"]
+
+        params["payload"] ->
+          payload = Poison.decode!(params["payload"])
+          # sentry slack
+          Poison.encode!(payload, pretty: true)
+
+        params["url"] != nil and params["message"] != nil ->
+          # sentry slack webhooks
+          "#{params["message"]} #{params["url"]}"
+
+        true ->
+          Poison.encode!(params, pretty: true)
+      end
+
     Nadia.send_message(chat_id, text)
     send_resp(conn, 200, "ok")
   end
 
   get "/set_webhook" do
     webhook_url = Application.get_env(:tg_webhooks_bot, :host_url) <> "/cmd"
+
     case Nadia.set_webhook(url: webhook_url) do
       :ok ->
         send_resp(conn, 200, "ok")
-      {:error, %Nadia.Model.Error{reason: reason}} -> 
+
+      {:error, %Nadia.Model.Error{reason: reason}} ->
         send_resp(conn, 400, Atom.to_string(reason))
     end
   end
@@ -61,7 +75,7 @@ defmodule TgWebhooksBot.Router do
     handle("/start", message)
   end
 
-  defp handle("/callback_url@"<>_, message) do
+  defp handle("/callback_url@" <> _, message) do
     handle("/start", message)
   end
 
