@@ -22,8 +22,6 @@ defmodule TgWebhooksBot.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:postgrex, ">= 0.0.0"},
-      {:ecto, "~> 2.2"},
       {:cowboy, "~> 1.0.0"},
       {:plug, "~> 1.4"},
       {:nadia, "~> 0.4.2"},
