@@ -17,4 +17,4 @@ config :tg_webhooks_bot, cowboy_options: [
   cacertfile: "/etc/letsencrypt/live/tg.dsh.li/chain.pem"
 ]
 
-config :tg_webhooks_bot, webhook_url: "https://tg.dsh.li/cmd/"
+config :tg_webhooks_bot, host_url: "https://tg.dsh.li"

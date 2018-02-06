@@ -10,12 +10,15 @@ defmodule TgWebhooksBot.Router do
   plug :dispatch
 
   # https://api.slack.com/incoming-webhooks
-  post "/incoming" do
+  post "/incoming/:chat_id" do
+    params = conn.params
+    chat_id = String.to_integer(params.chat_id)
+    Nadia.send_message(chat_id, params.text)
     send_resp(conn, 200, "ok")
   end
 
   get "/set_webhook" do
-    webhook_url = Application.get_env(:tg_webhooks_bot, :webhook_url)
+    webhook_url = Application.get_env(:tg_webhooks_bot, :host_url) <> "/cmd"
     case Nadia.set_webhook(url: webhook_url) do
       :ok ->
         send_resp(conn, 200, "ok")
@@ -38,7 +41,9 @@ defmodule TgWebhooksBot.Router do
   # handle cmd
   defp handle("/start", message) do
     chat_id = message["chat"]["id"]
-    Nadia.send_message(chat_id, "TODO")
+    host_url = Application.get_env(:tg_webhooks_bot, :host_url)
+    text = "Callback URL #{host_url}/incoming/#{chat_id}"
+    Nadia.send_message(chat_id, text)
   end
 
   defp handle("/ping", message) do
