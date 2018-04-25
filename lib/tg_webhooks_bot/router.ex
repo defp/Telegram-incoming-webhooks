@@ -75,6 +75,7 @@ defmodule TgWebhooksBot.Router do
     handle("/start", message)
   end
 
+  # @ form group
   defp handle("/callback_url@" <> _, message) do
     handle("/start", message)
   end
