@@ -57,12 +57,8 @@ defmodule TgWebhooksBot.Router do
     Nadia.send_message(chat_id, text)
   end
 
-  defp handle("/callback_url", message) do
-    handle("/start", message)
-  end
-
-  # @ form group
-  defp handle("/callback_url@" <> _, message) do
+  # callback_url@ form group
+  defp handle("/callback_url" <> _, message) do
     handle("/start", message)
   end
 
