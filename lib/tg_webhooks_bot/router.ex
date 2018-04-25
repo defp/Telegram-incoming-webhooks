@@ -16,9 +16,10 @@ defmodule TgWebhooksBot.Router do
 
   match "/incoming/:chat_id" do
     params = conn.params
-    chat_id = params["chat_id"] |> String.to_integer
+    chat_id = params["chat_id"] |> String.to_integer()
+
     if params["text"] do
-      Nadia.send_message(chat_id, text)
+      Nadia.send_message(chat_id, params["text"])
       send_resp(conn, 200, "ok")
     else
       send_resp(conn, 400, "require params :text")
