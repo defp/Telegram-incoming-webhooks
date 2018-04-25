@@ -14,32 +14,18 @@ defmodule TgWebhooksBot.Router do
   plug(:match)
   plug(:dispatch)
 
-  post "/incoming/:chat_id" do
+  match "/incoming/:chat_id" do
     params = conn.params
-    chat_id = String.to_integer(params["chat_id"])
-
-    text =
-      cond do
-        params["text"] ->
-          params["text"]
-
-        params["payload"] ->
-          payload = Poison.decode!(params["payload"])
-          # sentry slack
-          Poison.encode!(payload, pretty: true)
-
-        params["url"] != nil and params["message"] != nil ->
-          # sentry slack webhooks
-          "#{params["message"]} #{params["url"]}"
-
-        true ->
-          Poison.encode!(params, pretty: true)
-      end
-
-    Nadia.send_message(chat_id, text)
-    send_resp(conn, 200, "ok")
+    chat_id = params["chat_id"] |> String.to_integer
+    if params["text"] do
+      Nadia.send_message(chat_id, text)
+      send_resp(conn, 200, "ok")
+    else
+      send_resp(conn, 400, "require params :text")
+    end
   end
 
+  # for set bot webhook url
   get "/set_webhook" do
     webhook_url = Application.get_env(:tg_webhooks_bot, :host_url) <> "/cmd"
 
