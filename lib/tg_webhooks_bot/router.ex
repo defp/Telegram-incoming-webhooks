@@ -15,7 +15,7 @@ defmodule TgWebhooksBot.Router do
   plug(:match)
   plug(:dispatch)
 
-  match "/incoming/:chat_id" do
+  match "/incoming_text/:chat_id" do
     params = conn.params
     chat_id = params["chat_id"] |> String.to_integer()
 

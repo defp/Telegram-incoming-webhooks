@@ -1,4 +1,4 @@
-defmodule TgWebhooksBot.CMD  do
+defmodule TgWebhooksBot.CMD do
   require Logger
 
   def handle("/start", message) do
@@ -16,9 +16,9 @@ defmodule TgWebhooksBot.CMD  do
     host_url = Application.get_env(:tg_webhooks_bot, :host_url)
     msg = """
     hook url:
-    #{host_url}/incoming/#{chat_id}
+    #{host_url}/incoming_text/#{chat_id}
     example:
-    #{host_url}/incoming/#{chat_id}?text=helloworld
+    #{host_url}/incoming_text/#{chat_id}?text=helloworld
     """
     send_message(chat_id, msg)
   end
