@@ -16,6 +16,7 @@ defmodule TgWebhooksBot.Plugs.Command do
     msg = """
     command:
     /text - simple hook url with text params
+    /slack - get slack hook url
     """
     send_message(chat_id, msg)
   end
