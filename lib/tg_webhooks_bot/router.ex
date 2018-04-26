@@ -1,6 +1,7 @@
 defmodule TgWebhooksBot.Router do
   require Logger
   use Plug.Router
+  alias TgWebhooksBot.CMD
 
   plug(Plug.Logger)
 
@@ -41,35 +42,12 @@ defmodule TgWebhooksBot.Router do
 
   post "/cmd" do
     params = conn.params
-    handle(params["message"]["text"], params["message"])
+    CMD.handle(params["message"]["text"], params["message"])
     Logger.debug(params["message"]["text"])
     send_resp(conn, 200, "ok")
   end
 
   match _ do
     send_resp(conn, 404, "oops")
-  end
-
-  # handle cmd
-  defp handle("/start", message) do
-    chat_id = message["chat"]["id"]
-    host_url = Application.get_env(:tg_webhooks_bot, :host_url)
-    text = "Callback URL #{host_url}/incoming/#{chat_id}"
-    Nadia.send_message(chat_id, text)
-  end
-
-  # callback_url@ form group
-  defp handle("/callback_url" <> _, message) do
-    handle("/start", message)
-  end
-
-  defp handle("/ping", message) do
-    chat_id = message["chat"]["id"]
-    Nadia.send_message(chat_id, "pong")
-  end
-
-  defp handle(_, message) do
-    chat_id = message["chat"]["id"]
-    Nadia.send_message(chat_id, "error")
   end
 end
