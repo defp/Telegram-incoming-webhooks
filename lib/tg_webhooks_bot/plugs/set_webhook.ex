@@ -9,9 +9,8 @@ defmodule TgWebhooksBot.Plugs.SetWebhhook do
     case Nadia.set_webhook(url: webhook_url) do
       :ok ->
         send_resp(conn, 200, "ok")
-
       {:error, %Nadia.Model.Error{reason: reason}} ->
-        send_resp(conn, 400, Atom.to_string(reason))
+        send_resp(conn, 400, "error: #{reason}")
     end
   end
 end

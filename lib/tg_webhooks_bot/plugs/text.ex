@@ -8,8 +8,12 @@ defmodule TgWebhooksBot.Plugs.Text do
     chat_id = params["chat_id"] |> String.to_integer()
 
     if params["text"] do
-      Nadia.send_message(chat_id, params["text"])
-      send_resp(conn, 200, "ok")
+      with {:ok, _result} <- Nadia.send_message(chat_id, params["text"]) do
+        send_resp(conn, 200, "ok")
+      else
+        {:error, %Nadia.Model.Error{reason: reason}} ->
+        send_resp(conn, 400, "error: #{reason}")
+      end
     else
       send_resp(conn, 400, "require params :text")
     end
