@@ -1,5 +1,15 @@
-defmodule TgWebhooksBot.CMD do
+defmodule TgWebhooksBot.Plugs.Command do
   require Logger
+  import Plug.Conn
+
+  def init(opts), do: opts
+
+  def call(conn, _opts) do
+    params = conn.params
+    handle(params["message"]["text"], params["message"])
+    Logger.debug(params["message"]["text"])
+    send_resp(conn, 200, "ok")
+  end    
 
   def handle("/start", message) do
     chat_id = message["chat"]["id"]
