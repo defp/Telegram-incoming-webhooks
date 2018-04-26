@@ -33,6 +33,16 @@ defmodule TgWebhooksBot.Plugs.Command do
     send_message(chat_id, msg)
   end
 
+  def handle("/slack" <> _, message) do
+    chat_id = message["chat"]["id"]
+    host_url = Application.get_env(:tg_webhooks_bot, :host_url)
+    msg = """
+    hook url:
+    #{host_url}/incoming_slack/#{chat_id}
+    """
+    send_message(chat_id, msg)
+  end
+
   def handle(_, message) do
     send_message(message["chat"]["id"], "error command")
   end

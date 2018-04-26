@@ -17,6 +17,7 @@ defmodule TgWebhooksBot.Router do
   plug(:dispatch)
 
   match "/incoming_text/:chat_id", to: Plugs.Text
+  post "/incoming_slack/:chat_id", to: Plugs.Slack
   get "/set_webhook", to: Plugs.SetWebhhook
   post "cmd", to: Plugs.Command
 
