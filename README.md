@@ -17,7 +17,7 @@ get
 
 ```
 ## Request (11)
-curl "https://tg-incoming-webhooks-bot.herokuapp.com/incoming_text/123?text=helloword" \
+curl "https://telegram-incoming-webhooks.herokuapp.com/incoming_text/123?text=helloword" \
      -H 'Content-Type: application/x-www-form-urlencoded; charset=utf-8' \
      --data-urlencode "text=helloworld"
 ```
